@@ -1,3 +1,13 @@
-body {
-	background-color: green;
+html body {
+	box-sizing: border-box;
+	background-color: #FAEBD7;
+}
+
+.ball {
+	position: absolute;
+	margin: 20% 45% 0 45%;
+	width: 130px;
+	height: 130px;
+	border: 1px solid #8B4513;
+	border-radius: 50%;
 }
