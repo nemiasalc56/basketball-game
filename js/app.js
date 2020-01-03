@@ -154,14 +154,16 @@ const game = {
 
 	// run selector
 	runPowerSelector() {
-		const $dot = $('#dotP').addClass('power')
+		const $dot = $('#dotP').css('animation-play-state', 'running')
 	},
 
 	// stop selector
 	stopPowerSelector() {
 		const $dot = $('#dotP').position().top
-		const $dot2 = $('#dotP').removeClass('power')
+		// const $dot2 = $('#dotP').removeClass('power')
+		const $dot2 = $('#dotP').css('animation-play-state', 'paused')
 		console.log($dot);
+		console.log($dot2);
 	},
 	runDirSelector() {
 		const $dot = $('#dotD').addClass('dir')
