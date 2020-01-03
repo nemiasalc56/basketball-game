@@ -13,6 +13,7 @@ const game = {
 	collisionDetected: false,
 	myIntervalId: 0,
 	highEnough: false,
+	hitTarget: false,
 	// throw the ball
 	throwBall() {
 		// ball goes up
@@ -31,18 +32,15 @@ const game = {
 		const $ring = $('#ring')[0].getBoundingClientRect()
 		const $ball = $('#ball')[0].getBoundingClientRect()
 
-		// const dx = $ring.x - $ball.x
-		// const dy = $ring.y - $ball.y
-		// const ballRadius = $ball.height / 2
-		// const ringRadius = $ring.height / 2
-		// console.log(ballRadius);
-		// console.log(ringRadius);
-		// const distance = Math.sqrt(dx*dx + dy*dy)
+		const dx = $ring.x - $ball.x
+		const dy = $ring.y - $ball.y
+		const ballRadius = $ball.height / 2
+		const ringRadius = $ring.width / 2
+		const distance = Math.sqrt(dx*dx + dy*dy)
 
 		// check the position 
 
 		if($ball.top < 100) {
-			console.log('is less');
 			this.highEnough = true
 
 		}
@@ -51,42 +49,48 @@ const game = {
 			if($ring.x < $ball.x + $ring.width && 
 				$ring.x + $ring.width > $ball.x &&
 				$ring.y < $ball.y + $ball.height &&
-				$ring.y + $ring.height > $ball.y) {
-				console.log('Collision detected');
+				$ring.y + $ring.height > $ball.y && 
+				distance < ballRadius + ringRadius) {
 	
 				this.collisionDetected = true
 				$('#ball').attr('class', 'collision-state')
-				this.stopBall()
+				this.checkHitTarget()
 
-			}  else {
-			this.collisionDetected = false
-			$('#ball').attr('class', 'collision-state1')
-
-		}	
-
+			} else {
+					this.collisionDetected = false
+					$('#ball').attr('class', 'collision-state1')
+				}	
 		}
 		console.log($ball);
 	},
-	stopBall(){
+	checkHitTarget() {
 		const $ball = $('#ball')[0].getBoundingClientRect()
-		if(this.collisionDetected && $ball.left < 540) {
+		if(this.collisionDetected && $ball.left < 530) {
 			$('#ball').stop()
+			clearInterval(this.myIntervalId);
 			this.collisionDetected = false
 			this.highEnough = false
 			$('#ball').animate({ 
-			top:'-=80%',
-			left: '-=40%'
-		}, 600);
-		}
+				top:'-=40%',
+				left: '-=40%'
+			}, 600);
+		} else if(this.collisionDetected && $ball.left > 600) {
+			$('#ball').stop()
+			this.collisionDetected = false
+			this.highEnough = false
+			clearInterval(this.myIntervalId);
+			$('#ball').animate({ 
+				top:'-=40%',
+				left: '+=40%'
+			}, 600);
+		} 
 	},
 	time() {
 		this.myIntervalId = setInterval(function(){
 			game.checkCollision()
-		}, )
-	},
-	checkHitTarget() {
-
+		}, 0)
 	}
+	// Stop timer
 }
 
 
@@ -95,3 +99,17 @@ $('#ball').click(function() {
 	game.time()
 	game.throwBall()
 });
+
+
+
+
+// 1. tuning aim
+// 2. shoting direction
+// 3. Selector
+
+
+// Check collision
+// Work with direction of the ball
+// Check if it hit the target
+// Aiming selector
+// 
