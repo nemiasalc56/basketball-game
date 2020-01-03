@@ -3,11 +3,33 @@ html body {
 	background-color: #FAEBD7;
 }
 
-.ball {
+#ball {
 	position: absolute;
-	margin: 20% 45% 0 45%;
+	left: 400px;
+	top: 580px;
 	width: 130px;
 	height: 130px;
 	border: 1px solid #8B4513;
-	border-radius: 50%;
+	border-radius: 500px;
+}
+
+#ring {
+	position: absolute;
+	border-radius: 5px;
+	left: 520px;
+	top: 240px;
+	width: 200px;
+	height: 10px;
+	/*border: 1px solid #8B4513;*/
+	background-color: red;
+}
+
+.container {
+	width: 700px;
+	height: 700px;
+	border: 3px solid black;
+}
+
+.collision-state {
+	background-color: green;
 }
