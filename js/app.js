@@ -21,7 +21,7 @@ const game = {
 
 		// the ball goes down
 		$('#ball').animate({
-			top: '+=100%'
+			top: '+=130%'
 		}, 800)
 	},
 	// shooting direction
@@ -42,7 +42,7 @@ const game = {
 		const dx = $ring.x - $ball.x
 		const dy = $ring.y - $ball.y
 		const ballRadius = $ball.height / 2
-		const ringRadius = $ring.width / 2
+		const ringRadius = $ring.width
 		const distance = Math.sqrt(dx*dx + dy*dy)
 
 		// check the position 
@@ -72,14 +72,35 @@ const game = {
 	},
 	checkHitTarget() {
 		const $ball = $('#ball')[0].getBoundingClientRect()
-		if(this.collisionDetected && $ball.left < 530) {
+		if(this.collisionDetected && $ball.left < 510) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
 			this.collisionDetected = false
 			this.highEnough = false
 			$('#ball').animate({ 
-				top:'-=40%',
+				top:'-=20%',
 				left: '-=40%'
+			}, 600);
+		} else if(this.collisionDetected && $ball.left < 528) {
+			$('#ball').stop()
+			clearInterval(this.myIntervalId);
+			this.collisionDetected = false
+			this.highEnough = false
+			$('#ball').animate({ 
+				top:'-=20%',
+				left: '+=10%'
+			}, 600);
+		} else if(this.collisionDetected && $ball.left > 630) {
+			$('#ball').stop()
+			this.collisionDetected = false
+			this.highEnough = false
+			clearInterval(this.myIntervalId);
+			$('#ball').animate({ 
+				top:'-=20%',
+				left: '+=20%'
+			}, 600);
+			$('#ball').animate({ 
+				top:'+=120%'
 			}, 600);
 		} else if(this.collisionDetected && $ball.left > 600) {
 			$('#ball').stop()
@@ -87,10 +108,17 @@ const game = {
 			this.highEnough = false
 			clearInterval(this.myIntervalId);
 			$('#ball').animate({ 
-				top:'-=40%',
-				left: '+=40%'
+				top:'-=20%',
+				left: '-=20%'
 			}, 600);
-		} 
+			$('#ball').animate({ 
+				top:'+=120%',
+			}, 600);
+		} else if(this.collisionDetected && $ball.left < 600 && $ball.left > 529) {
+			this.collisionDetected = false
+			this.highEnough = false
+			clearInterval(this.myIntervalId);
+		}
 	},
 	time() {
 		this.myIntervalId = setInterval(function(){
