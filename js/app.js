@@ -17,7 +17,7 @@ const game = {
 	throwBall() {
 		// ball goes up
 		$('#ball').animate({ 
-			top:'-=80%'
+			top:'-=70%'
 		}, 600);
 
 		// the ball goes down
@@ -34,7 +34,7 @@ const game = {
 		// const dx = $ring.x - $ball.x
 		// const dy = $ring.y - $ball.y
 		// const ballRadius = $ball.height / 2
-		// const ringRadius = $ring.height
+		// const ringRadius = $ring.height / 2
 		// console.log(ballRadius);
 		// console.log(ringRadius);
 		// const distance = Math.sqrt(dx*dx + dy*dy)
@@ -56,11 +56,7 @@ const game = {
 	
 				this.collisionDetected = true
 				$('#ball').attr('class', 'collision-state')
-				$('#ball').animate({ 
-					top:'-=30%',
-					left: '-=30%'
-				}, 500);
-				$('#ball').stop()
+				this.stopBall()
 
 			}  else {
 			this.collisionDetected = false
@@ -71,16 +67,31 @@ const game = {
 		}
 		console.log($ball);
 	},
-	speed() {
+	stopBall(){
+		const $ball = $('#ball')[0].getBoundingClientRect()
+		if(this.collisionDetected && $ball.left < 540) {
+			$('#ball').stop()
+			this.collisionDetected = false
+			this.highEnough = false
+			$('#ball').animate({ 
+			top:'-=80%',
+			left: '-=40%'
+		}, 600);
+		}
+	},
+	time() {
 		this.myIntervalId = setInterval(function(){
 			game.checkCollision()
-		}, 100)
+		}, )
+	},
+	checkHitTarget() {
+
 	}
 }
 
 
 // Listeners
 $('#ball').click(function() {
-	game.speed()
+	game.time()
 	game.throwBall()
 });
