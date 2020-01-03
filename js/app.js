@@ -21,14 +21,18 @@ const game = {
 
 		// the ball goes down
 		$('#ball').animate({
-			top: '+=130%'
-		}, 800)
+			top: '+=130%',
+			width: '-=3%',
+			height: '-=3%'
+		}, 900)
 	},
 	// shooting direction
 	shootingDir(power, dir) {
 		const num = {
 			top: `-=${power}%`,
-			left: `+=${dir}%`
+			left: `+=${dir}%`,
+			width: '-=1%',
+			height: '-=1%'
 			}
 		this.throwBall(num)
 		game.time()
@@ -60,12 +64,12 @@ const game = {
 				distance < ballRadius + ringRadius) {
 	
 				this.collisionDetected = true
-				$('#ball').attr('class', 'collision-state')
+				$('#ball').addClass('collision-state')
 				this.checkHitTarget()
 
 			} else {
 					this.collisionDetected = false
-					$('#ball').attr('class', 'collision-state1')
+					$('#ball').addClass('collision-state1')
 				}	
 		}
 		console.log($ball);
@@ -101,8 +105,8 @@ const game = {
 			}, 600);
 			$('#ball').animate({ 
 				top:'+=120%'
-			}, 600);
-		} else if(this.collisionDetected && $ball.left > 600) {
+			}, 800);
+		} else if(this.collisionDetected && $ball.left > 550) {
 			$('#ball').stop()
 			this.collisionDetected = false
 			this.highEnough = false
@@ -113,7 +117,7 @@ const game = {
 			}, 600);
 			$('#ball').animate({ 
 				top:'+=120%',
-			}, 600);
+			}, 800);
 		} else if(this.collisionDetected && $ball.left < 600 && $ball.left > 529) {
 			this.collisionDetected = false
 			this.highEnough = false
@@ -124,18 +128,53 @@ const game = {
 		this.myIntervalId = setInterval(function(){
 			game.checkCollision()
 		}, 0)
-	}
 	// Stop timer
+	},
+	powerSelector() {
+		const $power = $('#dotP')
+
+		// $($power).animate({
+		// 	top: '+=50.7%',
+		// }, 800);
+		// $($power).animate({
+		// 	top: '-=50.7%',
+		// }, 800);
+		$($power).slider('option', 'animate');
+	},
+	dirSelector() {
+		const $dir = $('#dotD')
+
+		$($dir).animate({
+			top: '+=50.7%',
+		}, 900);
+		$($dir).animate({
+			top: '-=50.7%',
+		}, 900);		
+	},
+
+	// run selector
+	runPowerSelector() {
+		const $dot = $('#dotP').addClass('power')
+	},
+
+	// stop selector
+	stopPowerSelector() {
+		const $dot = $('#dotP').position().top
+		const $dot2 = $('#dotP').removeClass('power')
+		console.log($dot);
+	},
+	runDirSelector() {
+		const $dot = $('#dotD').addClass('dir')
+	},
+
+	// stop selector
+	stopDirSelector() {
+		const $dot = $('#dotD').position().top
+		const $dot2 = $('#dotD').removeClass('dir')
+		console.log($dot);
+	}
 
 }
-
-
-// Listeners
-// $('#ball').click(function() {
-// 	game.time()
-// 	game.shootingDir()
-// });
-
 
 
 
