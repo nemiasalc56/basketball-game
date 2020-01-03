@@ -15,16 +15,23 @@ const game = {
 	highEnough: false,
 	hitTarget: false,
 	// throw the ball
-	throwBall() {
+	throwBall(power) {
 		// ball goes up
-		$('#ball').animate({ 
-			top:'-=70%'
-		}, 600);
+		$('#ball').animate(power, 600);
 
 		// the ball goes down
 		$('#ball').animate({
 			top: '+=100%'
 		}, 800)
+	},
+	// shooting direction
+	shootingDir(power, dir) {
+		const num = {
+			top: `-=${power}%`,
+			left: `+=${dir}%`
+			}
+		this.throwBall(num)
+		game.time()
 	},
 
 	// check collision
@@ -91,14 +98,15 @@ const game = {
 		}, 0)
 	}
 	// Stop timer
+
 }
 
 
 // Listeners
-$('#ball').click(function() {
-	game.time()
-	game.throwBall()
-});
+// $('#ball').click(function() {
+// 	game.time()
+// 	game.shootingDir()
+// });
 
 
 
