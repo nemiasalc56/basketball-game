@@ -70,8 +70,8 @@ const game = {
 			height: '-=4%'
 		}, 1500)
 
-		this.myIntervalId2 = setInterval(function(){
-			game.resetBallPosition()	
+		this.myIntervalId2 = setInterval(() => {
+			this.resetBallPosition()	
 		}, 10)
 
 	},
@@ -83,14 +83,14 @@ const game = {
 			left: `${this.basketballClass.direction}%`,
 			width: '-=2%',
 			height: '-=4%'
-			}
+		}
 		this.throwBall(num)
-		game.time()
+		this.time()
 	},
 
 	// check collision
 	checkCollision() {
-		const $ring = $('#ring')[0].getBoundingClientRect()
+		const $ring = $('#rim')[0].getBoundingClientRect()
 		const $ball = $('#ball')[0].getBoundingClientRect()
 		// console.log(body);
 
@@ -193,8 +193,8 @@ const game = {
 		$('.score-num').text(this.score)
 	},
 	time() {
-		this.myIntervalId = setInterval(function(){
-			game.checkCollision()
+		this.myIntervalId = setInterval(() => {
+			this.checkCollision()
 		}, 1)
 	// Stop timer
 	},
