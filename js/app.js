@@ -1,7 +1,8 @@
 console.log('basketball game');
 
 class Basketball {
-	constructor(collision) {
+	constructor(position) {
+		this.ballPosition = position
 		this.powerLevel = null
 		this.direction = null
 	}
@@ -204,6 +205,32 @@ const game = {
 			this.basketballClass.stopDirSelector()
 		} else if(key === 'f') {
 			this.shootingDir()
+		}
+	},
+	resetBallPosition() {
+		$('#ball').css({
+			left: '48.2%',
+			top: '590px',
+			width: '130px',
+			height: '130px'
+		})
+		$('#dotP').css({
+			'animation-name': 'more',
+			top: '20px'
+		})
+		$('#dotD').css({
+			'animation-name': 'more',
+			top: '20px'
+		})
+		if($('#dotP').css('animation-name') == 'more') {
+			$('#dotP').css({
+				'animation-name': 'slide'
+			})
+			this.powerWasCalled = false
+			$('#dotD').css({
+				'animation-name': 'range'
+			})
+			this.dirWasCalled = false
 		}
 	}
 

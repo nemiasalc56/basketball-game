@@ -199,7 +199,7 @@ html body {
 
 #dotD {
 	animation-name: range;
-	animation-duration: 10s;
+	animation-duration: 15s;
 	animation-iteration-count: 2;
 	animation-delay: 0s;
 	animation-play-state: paused;
