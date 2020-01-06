@@ -91,7 +91,7 @@ html body {
 	height: 400px;
 	border: 3px solid black;	
 	display: inline-block;
-	background: linear-gradient(red 10%, green, red 70%);
+	background: linear-gradient(red 10%, green, red 75%);
 	border-radius: 5px;
 }
 

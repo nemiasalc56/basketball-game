@@ -66,8 +66,8 @@ const game = {
 		// the ball goes down
 		$('.ball2').animate({
 			top: '+=2000px',
-			width: '-=150px',
-			height: '-=160px'
+			width: '-=2px',
+			height: '-=4px'
 		}, 2500)
 
 		this.myIntervalId2 = setInterval(() => {
@@ -80,8 +80,8 @@ const game = {
 		const num = {
 			top: `-=${this.basketballClass.powerLevel}px`,
 			left: `${this.basketballClass.direction}px`,
-			width: '-=2px',
-			height: '-=4px'
+			width: '-=15px',
+			height: '-=16px'
 		}
 		this.throwBall(num)
 		this.time()
@@ -123,7 +123,14 @@ const game = {
 	checkHitTarget() {
 		const $ball = $('#ball')[0].getBoundingClientRect()
 		console.log($ball);
-		if(this.collisionDetected && $ball.left < 670) {
+		if(this.collisionDetected && 
+			$ball.left > 665 && $ball.left < 685) {
+			this.score++
+			this.collisionDetected = false
+			this.highEnough = false
+			clearInterval(this.myIntervalId);
+			console.log(3);
+		} else if(this.collisionDetected && $ball.left < 635) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
 			this.collisionDetected = false
@@ -131,7 +138,7 @@ const game = {
 			// bounce to left
 			$('#ball').animate({ 
 				top:'-=200px',
-				left: '-=100px'
+				left: '-=90px'
 			}, 600);
 			$('#ball').animate({
 				top: '+=1300px',
@@ -139,56 +146,61 @@ const game = {
 			}, 2000)
 			console.log($ball);
 			console.log(1);
-		} else if(this.collisionDetected && $ball.left > 670 &&
-			$ball.left < 700) {
+		} else if(this.collisionDetected && $ball.left > 635 &&
+			$ball.left < 665) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
 			this.collisionDetected = false
 			this.highEnough = false
 			// bounce to right
 			$('#ball').animate({ 
-				top:'-=20%',
-				left: '+=15%'
+				top:'-=200px',
+				left: '+=100px'
 			}, 600);
 			$('#ball').animate({
-				top: '+=130%',
-				left: '+=9%',
-			}, 1500)
+				top: '+=1300px',
+				left: '+=90px',
+			}, 2000)
 
 			console.log(2);
-		} else if(this.collisionDetected && 
-			$ball.left > 700 && $ball.left < 720) {
-			this.score++
+		} else if(this.collisionDetected &&
+			$ball.left > 685 && $ball.left < 708) {
+			$('#ball').stop()
+			clearInterval(this.myIntervalId)
 			this.collisionDetected = false
 			this.highEnough = false
-			clearInterval(this.myIntervalId);
-			console.log(3);
-		} 
-		// else if(this.collisionDetected && 
-		// 	$ball.left > 709 && $ball.left < 720) {
-		// 	$('#ball').stop()
-		// 	this.collisionDetected = false
-		// 	this.highEnough = false
-		// 	clearInterval(this.myIntervalId);
-		// 	// bounce to left
-		// 	$('#ball').animate({ 
-		// 		top:'-=20%',
-		// 		left: '-=10%'
-		// 	}, 600);
-		// 	$('#ball').animate({
-		// 		top: '+=130%',
-		// 		left: '-=9%'
-		// 	}, 1500)
+			//bounce left
+			$('#ball').animate({ 
+				top:'-=200px',
+				left: '-=90px'
+			}, 600);
+			$('#ball').animate({
+				top: '+=1300px',
+				left: '-=90px'
+			}, 2000)
+			console.log('right 1');
+			console.log($ball);
+		} else if(this.collisionDetected &&
+			$ball.left > 708) {
+			$('#ball').stop()
+			clearInterval(this.myIntervalId)
+			this.collisionDetected = false
+			this.highEnough = false
 
-		// 	console.log(4);
-		// } else if(this.collisionDetected && 
-		// 	$ball.left > 720) {
-		// 	$('#ball').stop()
-		// 	this.collisionDetected = false
-		// 	this.highEnough = false
-		// 	clearInterval(this.myIntervalId);
-		// 	console.log(3);
-		// }
+			// bounce to right
+			$('#ball').animate({ 
+				top:'-=200px',
+				left: '+=100px'
+			}, 600);
+			$('#ball').animate({
+				top: '+=1300px',
+				left: '+=90px',
+			}, 2000)
+
+			console.log('right 2');
+			console.log($ball);
+		} 
+		
 		$('.score-num').text(this.score)
 	},
 	time() {
@@ -240,13 +252,17 @@ const game = {
 					'animation-name': 'range'
 				})
 				this.dirWasCalled = false
+				this.basketballClass.powerLevel = 0
+				this.basketballClass.direction = 0
 				clearInterval(this.myIntervalId2)
 			}
 			this.collisionDetected = false
 			this.highEnough = false
 		}
 		console.log($('#ball')[0].getBoundingClientRect().top);
-	}
+	},
+	// check that the collision was on a good part
+
 
 }
 
