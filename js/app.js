@@ -32,7 +32,7 @@ class Basketball {
 	}
 
 	getPowerLevel(power) {
-		const myPower = Math.floor((power*100)/25)
+		const myPower = Math.floor((power*100)/50)
 		this.powerLevel = myPower
 	}
 
@@ -80,8 +80,8 @@ const game = {
 		const num = {
 			top: `-=${this.basketballClass.powerLevel}px`,
 			left: `${this.basketballClass.direction}px`,
-			width: '-=2%',
-			height: '-=4%'
+			width: '-=2px',
+			height: '-=4px'
 		}
 		this.throwBall(num)
 		this.time()
@@ -130,13 +130,13 @@ const game = {
 			this.highEnough = false
 			// bounce to left
 			$('#ball').animate({ 
-				top:'-=20%',
-				left: '-=10%'
+				top:'-=200px',
+				left: '-=100px'
 			}, 600);
 			$('#ball').animate({
-				top: '+=130%',
-				left: '-=9%'
-			}, 1500)
+				top: '+=1300px',
+				left: '-=90px'
+			}, 2000)
 			console.log($ball);
 			console.log(1);
 		} else if(this.collisionDetected && $ball.left > 670 &&
