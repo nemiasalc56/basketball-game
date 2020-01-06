@@ -32,12 +32,12 @@ class Basketball {
 	}
 
 	getPowerLevel(power) {
-		const myPower = Math.floor((power * 100) / 203)
+		const myPower = Math.floor((power*100)/25)
 		this.powerLevel = myPower
 	}
 
 	getBallDirection(dir) {
-		const ballDirection = Math.floor((dir*100) / 500)
+		const ballDirection = Math.floor((dir*100) / 100)
 		console.log(ballDirection);
 
 		this.direction = ballDirection
@@ -65,10 +65,10 @@ const game = {
 		$('.ball2').animate(power, 900);
 		// the ball goes down
 		$('.ball2').animate({
-			top: '+=130%',
-			width: '-=2%',
-			height: '-=4%'
-		}, 1500)
+			top: '+=2000px',
+			width: '-=150px',
+			height: '-=160px'
+		}, 2500)
 
 		this.myIntervalId2 = setInterval(() => {
 			this.resetBallPosition()	
@@ -78,9 +78,8 @@ const game = {
 	// shooting direction
 	shootingDir(input1, input2) {
 		const num = {
-			// left: `${this.basketballClass.direction}
-			top: `-=${this.basketballClass.powerLevel}%`,
-			left: `${this.basketballClass.direction}%`,
+			top: `-=${this.basketballClass.powerLevel}px`,
+			left: `${this.basketballClass.direction}px`,
 			width: '-=2%',
 			height: '-=4%'
 		}

@@ -6,16 +6,25 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 </head>
 <body>
+	<div class="main-container">
+		<div id="ring-container">
+			<div class="ball-indicator"></div>
+		</div>
 
-	<div id="ring-container">
-		<div class="ball-indicator"></div>
+		<div id="rim"></div>
+
+		<div class="ball-container">
+		<div id="ball" class="ball2"></div>
+		</div>
+		
+
 	</div>
 	
-	<div id="rim"></div>
-	
-	<div class="ball-container">
-	<div id="ball" class="ball2"></div>
-	</div>
+	<nav class="player-info">
+		<p id="score">Score: <span class="score-num">0</span></p>
+		<p id="player">Player: <span class="player-num">1</span></p>
+		<p id="attemp">Attemps: <span class="attemp-num">0</span></p>
+	</nav>
 
 	<div class="select-panel">
 		<nav class="power-direction">
@@ -34,11 +43,6 @@
 		</div>
 	</div>
 
-	<nav class="player-info">
-		<p id="score">Score: <span class="score-num">0</span></p>
-		<p id="player">Player: <span class="player-num">1</span></p>
-		<p id="attemp">Attemps: <span class="attemp-num">0</span></p>
-	</nav>
 
 
 	<script type="text/javascript" src="js/app.js"></script>
