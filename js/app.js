@@ -16,8 +16,6 @@ class Basketball {
 		const $dot2 = $('#dotP').css('animation-play-state', 'paused')
 		const $dot = $('#dotP').position().top
 		this.getPowerLevel($dot)
-		console.log($dot);
-		console.log($dot2);
 	}
 
 	runDirSelector() {
@@ -54,6 +52,7 @@ const game = {
 	power: 1,
 	collisionDetected: false,
 	myIntervalId: 0,
+	myIntervalId2: 0,
 	highEnough: false,
 	hitTarget: false,
 	powerWasCalled: false,
@@ -63,13 +62,18 @@ const game = {
 	throwBall(power, num) {
 		$('#ball').css('animation-play-state', 'running')
 		// ball goes up
-		$('#ball').animate(power, 900);
+		$('.ball2').animate(power, 900);
 		// the ball goes down
-		$('#ball').animate({
+		$('.ball2').animate({
 			top: '+=130%',
 			width: '-=2%',
 			height: '-=4%'
 		}, 1500)
+
+		this.myIntervalId2 = setInterval(function(){
+			game.resetBallPosition()	
+		}, 10)
+
 	},
 	// shooting direction
 	shootingDir(input1, input2) {
@@ -120,7 +124,7 @@ const game = {
 	checkHitTarget() {
 		const $ball = $('#ball')[0].getBoundingClientRect()
 		console.log($ball);
-		if(this.collisionDetected && $ball.left < 680) {
+		if(this.collisionDetected && $ball.left < 670) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
 			this.collisionDetected = false
@@ -136,7 +140,8 @@ const game = {
 			}, 1500)
 			console.log($ball);
 			console.log(1);
-		} else if(this.collisionDetected && $ball.left < 700) {
+		} else if(this.collisionDetected && $ball.left > 670 &&
+			$ball.left < 700) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
 			this.collisionDetected = false
@@ -208,30 +213,39 @@ const game = {
 		}
 	},
 	resetBallPosition() {
-		$('#ball').css({
-			left: '48.2%',
-			top: '590px',
-			width: '130px',
-			height: '130px'
-		})
-		$('#dotP').css({
-			'animation-name': 'more',
-			top: '20px'
-		})
-		$('#dotD').css({
-			'animation-name': 'more',
-			top: '20px'
-		})
-		if($('#dotP').css('animation-name') == 'more') {
+	// reset the position
+
+		if($('#ball')[0].getBoundingClientRect().top > 700) {
+			$('#ball').stop()
+			$('#ball').css({
+				left: '48.2%',
+				top: '590px',
+				width: '130px',
+				height: '130px'
+			})
 			$('#dotP').css({
-				'animation-name': 'slide'
+				'animation-name': 'more',
+				top: '20px'
 			})
-			this.powerWasCalled = false
 			$('#dotD').css({
-				'animation-name': 'range'
+				'animation-name': 'more',
+				top: '20px'
 			})
-			this.dirWasCalled = false
+			if($('#dotP').css('animation-name') == 'more') {
+				$('#dotP').css({
+					'animation-name': 'slide'
+				})
+				this.powerWasCalled = false
+				$('#dotD').css({
+					'animation-name': 'range'
+				})
+				this.dirWasCalled = false
+				clearInterval(this.myIntervalId2)
+			}
+			this.collisionDetected = false
+			this.highEnough = false
 		}
+		console.log($('#ball')[0].getBoundingClientRect().top);
 	}
 
 }
@@ -242,6 +256,7 @@ $(document).on('keypress', (e) => {
 	console.log(e.key);
 	game.keyPressed(e.key)
 })
+
 
 
 // 1. tuning aim
