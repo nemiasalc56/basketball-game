@@ -9,7 +9,7 @@ html body {
 }
 
 body .player-info, #select-panel, .main-container {
-	/*display: none;*/
+	display: none;
 }
 
 #ring-container {
@@ -203,18 +203,32 @@ body .player-info, #select-panel, .main-container {
 	top: 100px;
 	left: 420px;
 	font-size: 20px;
+	display: block;
 }
 
 .instructions {
 	text-align: center;
 }
 
-.start-game {
+.start-button {
 	position: relative;
 	left: 190px;
 	font-size: 40px;
 	border-radius: 10px;
 	background-color: chartreuse;
+}
+
+.control {
+	background-color: rgba(200, 200, 200, 0.5);
+	position: absolute;
+	width: 180px;
+	border-radius: 10px;
+	bottom: 0;
+	display: none;
+}
+
+.w, .r, .f {
+	font-size: 20px;
 }
 
 @keyframes slide {

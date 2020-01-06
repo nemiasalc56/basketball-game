@@ -5,7 +5,7 @@ class Basketball {
 		this.ballPosition = position
 		this.powerLevel = null
 		this.direction = null
-		this.startGame = false
+		this.start = false
 	}
 	// run power slider
 	runPowerSelector() {
@@ -47,10 +47,10 @@ class Basketball {
 
 	// switch game on/off
 	startSwitch() {
-		if(this.startGame=== false) {
-			this.startGame = true
-		} else if(this.startGame === true) {
-			this.startGame = false
+		if(this.start=== false) {
+			this.start = true
+		} else if(this.start === true) {
+			this.start = false
 		}
 	}
 }
@@ -68,7 +68,20 @@ const game = {
 	powerWasCalled: false,
 	dirWasCalled: false,
 	basketballClass: new Basketball(),
+	// start game
+	startGame() {
+		// Show the game
+		$('.player-info').css('display', 'block')
+		$('#select-panel').css('display', 'block')
+		$('.main-container').css('display', 'block')
+		$('.control').css('display', 'block')
 
+		// hide the instructions
+		$('.start').css('display', 'none')
+
+		// switch the game start
+		this.basketballClass.startSwitch()
+	},
 	// throw the ball
 	throwBall(power, num) {
 		$('#ball').css('animation-play-state', 'running')
@@ -222,17 +235,21 @@ const game = {
 	// Stop timer
 	},
 	keyPressed(key) {
-		if(key === 'w' && this.powerWasCalled === false) {
+		if(key.toLowerCase() === 'w' && this.powerWasCalled === false &&
+			this.basketballClass.start === true) {
 			this.basketballClass.runPowerSelector()
 			this.powerWasCalled = true
-		} else if(key === 'w' && this.powerWasCalled) {
+		} else if(key.toLowerCase() === 'w' && this.powerWasCalled &&
+			this.basketballClass.start === true) {
 			this.basketballClass.stopPowerSelector()
-		} else if(key === 'r' && this.dirWasCalled === false) {
+		} else if(key.toLowerCase() === 'r' && this.dirWasCalled === false &&
+			this.basketballClass.start === true) {
 			this.basketballClass.runDirSelector()
 			this.dirWasCalled = true
-		} else if(key === 'r' && this.dirWasCalled) {
+		} else if(key.toLowerCase() === 'r' && this.dirWasCalled &&
+			this.basketballClass.start === true) {
 			this.basketballClass.stopDirSelector()
-		} else if(key === 'f') {
+		} else if(key.toLowerCase() === 'f' && this.basketballClass.start === true) {
 			this.shootingDir()
 		}
 	},
@@ -281,11 +298,12 @@ const game = {
 
 
 $(document).on('keypress', (e) => {
-	console.log(e.key);
 	game.keyPressed(e.key)
 })
 
-
+$('.start-button').click((e) => {
+	game.startGame()
+})
 
 // 1. tuning aim
 // 2. shoting direction
