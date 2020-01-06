@@ -157,15 +157,15 @@ const game = {
 			}, 1500)
 
 			console.log(2);
+		} else if(this.collisionDetected && 
+			$ball.left > 700 && $ball.left < 720) {
+			this.score++
+			this.collisionDetected = false
+			this.highEnough = false
+			clearInterval(this.myIntervalId);
+			console.log(3);
 		} 
 		// else if(this.collisionDetected && 
-		// 	$ball.left > 670 && $ball.left < 709) {
-		// 	$('#ball').stop()
-		// 	this.collisionDetected = false
-		// 	this.highEnough = false
-		// 	clearInterval(this.myIntervalId);
-		// 	console.log(3);
-		// } else if(this.collisionDetected && 
 		// 	$ball.left > 709 && $ball.left < 720) {
 		// 	$('#ball').stop()
 		// 	this.collisionDetected = false
@@ -190,6 +190,7 @@ const game = {
 		// 	clearInterval(this.myIntervalId);
 		// 	console.log(3);
 		// }
+		$('.score-num').text(this.score)
 	},
 	time() {
 		this.myIntervalId = setInterval(function(){

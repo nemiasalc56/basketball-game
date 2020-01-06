@@ -143,6 +143,10 @@ html body {
 	font-size: 30px;
 }
 
+#player, #score, #attemp {
+	display: inline-block;
+}
+
 #player, #attemp {
 	margin-left: 280px;
 }
