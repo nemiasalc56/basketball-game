@@ -101,6 +101,7 @@ const game = {
 		// check the position
 		if($ball.top < 100) {
 			this.highEnough = true
+			$('#rim').appendTo($('.main-container'))
 		}
 
 		if(this.highEnough) {
@@ -254,6 +255,7 @@ const game = {
 				this.dirWasCalled = false
 				this.basketballClass.powerLevel = 0
 				this.basketballClass.direction = 0
+				$('#ball').appendTo($('.main-container'))
 				clearInterval(this.myIntervalId2)
 			}
 			this.collisionDetected = false
