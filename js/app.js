@@ -5,6 +5,7 @@ class Basketball {
 		this.ballPosition = position
 		this.powerLevel = null
 		this.direction = null
+		this.startGame = false
 	}
 	// run power slider
 	runPowerSelector() {
@@ -43,6 +44,15 @@ class Basketball {
 		this.direction = ballDirection
 
 	}
+
+	// switch game on/off
+	startSwitch() {
+		if(this.startGame=== false) {
+			this.startGame = true
+		} else if(this.startGame === true) {
+			this.startGame = false
+		}
+	}
 }
 
 const game = {
@@ -58,6 +68,7 @@ const game = {
 	powerWasCalled: false,
 	dirWasCalled: false,
 	basketballClass: new Basketball(),
+
 	// throw the ball
 	throwBall(power, num) {
 		$('#ball').css('animation-play-state', 'running')
@@ -231,7 +242,7 @@ const game = {
 		if($('#ball')[0].getBoundingClientRect().top > 700) {
 			$('#ball').stop()
 			$('#ball').css({
-				left: '48.2%',
+				left: '170px',
 				top: '590px',
 				width: '130px',
 				height: '130px'
@@ -263,8 +274,7 @@ const game = {
 		}
 		console.log($('#ball')[0].getBoundingClientRect().top);
 	},
-	// check that the collision was on a good part
-
+	// clear the screen
 
 }
 

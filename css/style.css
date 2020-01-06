@@ -8,6 +8,10 @@ html body {
 	left: 500px;
 }
 
+body .player-info, #select-panel, .main-container {
+	/*display: none;*/
+}
+
 #ring-container {
 	position: absolute;
 	left: 40%;
@@ -187,6 +191,30 @@ html body {
 
 .power-direction {
 	display: inline-block;
+}
+
+.start {
+	position: absolute;
+	border: 3px solid black;
+	border-radius: 10px;
+	width: 600px;
+	height: 400px;
+	background-color: aqua;
+	top: 100px;
+	left: 420px;
+	font-size: 20px;
+}
+
+.instructions {
+	text-align: center;
+}
+
+.start-game {
+	position: relative;
+	left: 190px;
+	font-size: 40px;
+	border-radius: 10px;
+	background-color: chartreuse;
 }
 
 @keyframes slide {
