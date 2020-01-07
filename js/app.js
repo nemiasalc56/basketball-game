@@ -68,7 +68,7 @@ class Basketball {
 const game = {
 	remainingAttemp: 3,
 	score: 0,
-	round: 1,
+	round: 0,
 	power: 1,
 	collisionDetected: false,
 	myIntervalId: 0,
@@ -345,7 +345,9 @@ const game = {
 				this.playerOnePoint = this.score
 			} else if(this.basketballClass.player===2) {
 				this.playerTwoPoint = this.score
-				this.winScenario()
+				this.winRound()
+				this.round++
+				this.winSceneario()
 			}
 
 			// switch player
@@ -361,15 +363,17 @@ const game = {
 		}
 
 	},
-	winScenario() {
+	winRound() {
 		// check the values
 		if(this.remainingAttemp === 0 && 
 			this.basketballClass.player===2) {
 
 			if(this.playerOnePoint > this.playerTwoPoint) {
+				this.playerOneRound++
 				console.log('Player 1 won the round');
 			} else if(this.playerOnePoint < this.playerTwoPoint) {
-				console.log('player 2 won');
+				this.playerTwoRound++
+				console.log('Player 2 won the round');
 			} else if(this.playerOnePoint === this.playerTwoPoint) {
 				console.log('This round is a tie');
 			}
@@ -399,6 +403,18 @@ const game = {
 			this.basketballClass.player === 2) {
 			this.shootingDir()
 		}	
+	},
+	// check win scenario
+	winSceneario() {
+		if(this.round >= 2) {
+			if(this.playerOneRound > this.playerTwoRound) {
+				console.log('Player 1 is the winner');
+			} else if(this.playerOneRound < this.playerTwoRound) {
+				console.log('Player 2 is the winner');
+			}
+
+		}
+
 	}
 
 }
