@@ -1,8 +1,7 @@
 console.log('basketball game');
 
 class Basketball {
-	constructor(position) {
-		this.ballPosition = position
+	constructor() {
 		this.powerLevel = null
 		this.direction = null
 		this.start = false
@@ -338,7 +337,6 @@ const game = {
 
 	// status
 	getStatus() { 
-		this.winScenario()
 		// check the attemps
 		if(this.remainingAttemp === 0) {
 
@@ -347,11 +345,11 @@ const game = {
 				this.playerOnePoint = this.score
 			} else if(this.basketballClass.player===2) {
 				this.playerTwoPoint = this.score
+				this.winScenario()
 			}
 
 			// switch player
 			this.remainingAttemp = 3
-				this.winScenario()
 			this.basketballClass.switchPlayer()
 			this.score = 0
 			$('.attemp-num').text(this.remainingAttemp)
