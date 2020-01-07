@@ -12,6 +12,10 @@ class Basketball {
 		const $dot = $('#dotP').css('animation-play-state', 'running')
 	}
 
+	runPowerSelector2() {
+		const $dot = $('#dotP2').css('animation-play-state', 'running')
+	}
+
 	// stop selector
 	stopPowerSelector() {
 		const $dot2 = $('#dotP').css('animation-play-state', 'paused')
@@ -19,14 +23,32 @@ class Basketball {
 		this.getPowerLevel($dot)
 	}
 
+	stopPowerSelector2() {
+		const $dot2 = $('#dotP2').css('animation-play-state', 'paused')
+		const $dot = $('#dotP2').position().top
+		this.getPowerLevel($dot)
+	}
+
 	runDirSelector() {
 		const $dot = $('#dotD').css('animation-play-state', 'running')
+	}
+
+	runDirSelector2() {
+		const $dot = $('#dotD2').css('animation-play-state', 'running')
 	}
 
 	// stop selector
 	stopDirSelector() {
 		const $dot2 = $('#dotD').css('animation-play-state', 'paused')
 		const $dot = $('#dotD').position().top
+		this.getBallDirection($dot)
+		console.log($dot);
+		console.log($dot2);
+	}
+
+	stopDirSelector2() {
+		const $dot2 = $('#dotD2').css('animation-play-state', 'paused')
+		const $dot = $('#dotD2').position().top
 		this.getBallDirection($dot)
 		console.log($dot);
 		console.log($dot2);
@@ -380,24 +402,27 @@ const game = {
 		}
 	},
 	keyPressed2(key) {
-		if(key.toLowerCase() === 'u' && this.powerWasCalled === false &&
+		if(key.toLowerCase() === 'u' && 
+			this.powerWasCalled === false &&
 			this.basketballClass.start === true &&
 			this.basketballClass.player === 2) {
-			this.basketballClass.runPowerSelector()
+			this.basketballClass.runPowerSelector2()
 			this.powerWasCalled = true
-		} else if(key.toLowerCase() === 'u' && this.powerWasCalled &&
+		} else if(key.toLowerCase() === 'u' && 
+			this.powerWasCalled &&
 			this.basketballClass.start === true &&
 			this.basketballClass.player === 2) {
-			this.basketballClass.stopPowerSelector()
-		} else if(key.toLowerCase() === 'i' && this.dirWasCalled === false &&
+			this.basketballClass.stopPowerSelector2()
+		} else if(key.toLowerCase() === 'i' && 
+			this.dirWasCalled === false &&
 			this.basketballClass.start === true &&
 			this.basketballClass.player === 2) {
-			this.basketballClass.runDirSelector()
+			this.basketballClass.runDirSelector2()
 			this.dirWasCalled = true
 		} else if(key.toLowerCase() === 'i' && this.dirWasCalled &&
 			this.basketballClass.start === true &&
 			this.basketballClass.player === 2) {
-			this.basketballClass.stopDirSelector()
+			this.basketballClass.stopDirSelector2()
 		} else if(key.toLowerCase() === 'j' && 
 			this.basketballClass.start === true &&
 			this.basketballClass.player === 2) {
@@ -434,12 +459,4 @@ $('.start-button').click((e) => {
 // 2. shoting direction
 // 3. Selector
 
-// reset score
 // dificulty
-
-
-// Check collision
-// Work with direction of the ball
-// Check if it hit the target
-// Aiming selector
-// 
