@@ -6,7 +6,7 @@ class Basketball {
 		this.powerLevel = null
 		this.direction = null
 		this.start = false
-		this.player = 'player 1'
+		this.player = 'Player 1'
 	}
 	// run power slider
 	runPowerSelector() {
@@ -57,16 +57,16 @@ class Basketball {
 
 	// switch player
 	switchPlayer() {
-		if(this.player === 'player 1') {
-			this.player = 'player 2'
-		} else if(this.player === 'player 2') {
-			this.player = 'player 1'
+		if(this.player === 'Player 1') {
+			this.player = 'Player 2'
+		} else if(this.player === 'Player 2') {
+			this.player = 'Player 1'
 		}
 	}
 }
 
 const game = {
-	remainingAttemp: 2,
+	remainingAttemp: 3,
 	score: 0,
 	round: 1,
 	power: 1,
@@ -104,12 +104,13 @@ const game = {
 		// the ball goes down
 		$('.ball2').animate({
 			top: '+=2000px',
-			width: '-=2px',
-			height: '-=4px'
+			width: '-=60px',
+			height: '-=80px'
 		}, 2500)
 
 		this.myIntervalId2 = setInterval(() => {
-			this.resetBallPosition()	
+			this.resetBallPosition()
+			this.getStatus()	
 		}, 10)
 
 	},
@@ -118,8 +119,8 @@ const game = {
 		const num = {
 			top: `-=${this.basketballClass.powerLevel}px`,
 			left: `${this.basketballClass.direction}px`,
-			width: '-=15px',
-			height: '-=16px'
+			width: '-=30px',
+			height: '-=30px'
 		}
 		this.throwBall(num)
 		this.time()
@@ -163,7 +164,7 @@ const game = {
 		const $ball = $('#ball')[0].getBoundingClientRect()
 		console.log($ball);
 		if(this.collisionDetected && 
-			$ball.left > 665 && $ball.left < 685) {
+			$ball.left > 664 && $ball.left < 687) {
 			this.score++
 			// this.collisionDetected = false
 			this.highEnough = false
@@ -182,7 +183,7 @@ const game = {
 			$('#ball').animate({
 				top: '+=1300px',
 				left: '-=90px'
-			}, 2000)
+			}, 1800)
 
 			// substrac attemps
 			this.remainingAttemp--
@@ -202,13 +203,13 @@ const game = {
 			$('#ball').animate({
 				top: '+=1300px',
 				left: '+=90px',
-			}, 2000)
+			}, 1800)
 
 			// Substrac attemps
 			this.remainingAttemp--
 			console.log(2);
 		} else if(this.collisionDetected &&
-			$ball.left > 685 && $ball.left < 708) {
+			$ball.left > 684 && $ball.left < 708) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId)
 			// this.collisionDetected = false
@@ -221,7 +222,7 @@ const game = {
 			$('#ball').animate({
 				top: '+=1300px',
 				left: '-=90px'
-			}, 2000)
+			}, 1800)
 
 			// substrac attemps
 			this.remainingAttemp--
@@ -242,7 +243,7 @@ const game = {
 			$('#ball').animate({
 				top: '+=1300px',
 				left: '+=90px',
-			}, 2000)
+			}, 1800)
 
 			// substrac attemps
 			this.remainingAttemp--
@@ -316,6 +317,7 @@ const game = {
 
 				$('#ball').appendTo($('.main-container'))
 				clearInterval(this.myIntervalId2)
+				clearInterval(this.myIntervalId)
 			}
 			this.collisionDetected = false
 			this.highEnough = false
@@ -323,7 +325,27 @@ const game = {
 		}
 		// console.log($('#ball')[0].getBoundingClientRect().top);
 	},
-	// clear the screen
+
+	// status
+	getStatus() { 
+
+		// check the attemps
+		if(this.remainingAttemp === 0) {
+			// switch player
+			this.basketballClass.switchPlayer()
+			this.remainingAttemp = 3
+			$('.attemp-num').text(this.remainingAttemp)
+
+
+			console.log('hi');
+		}
+		if(this.basketballClass.player === "Player 1") {
+			$('.player-num').text(1)
+		} else if(this.basketballClass.player === "Player 2") {
+			$('.player-num').text(2)
+		}
+
+	}
 
 }
 
