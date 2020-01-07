@@ -6,7 +6,7 @@ class Basketball {
 		this.powerLevel = null
 		this.direction = null
 		this.start = false
-		this.player = 'Player 1'
+		this.player = 1
 	}
 	// run power slider
 	runPowerSelector() {
@@ -57,10 +57,11 @@ class Basketball {
 
 	// switch player
 	switchPlayer() {
-		if(this.player === 'Player 1') {
-			this.player = 'Player 2'
-		} else if(this.player === 'Player 2') {
-			this.player = 'Player 1'
+		if(this.player === 1) {
+			this.player = 2
+			$('.player-info').css('color', 'white')
+		} else if(this.player === 2) {
+			this.player = 1
 		}
 	}
 }
@@ -79,14 +80,17 @@ const game = {
 	dirWasCalled: false,
 	basketballClass: new Basketball(),
 	playerOnePoint: 0,
-	playerTwoPoints: 0,
+	playerTwoPoint: 0,
+	playerOneRound: 0,
+	playerTwoRound: 0,
 	// start game
 	startGame() {
 		// Show the game
 		$('.player-info').css('display', 'block')
 		$('#select-panel').css('display', 'block')
 		$('.main-container').css('display', 'block')
-		$('.control').css('display', 'block')
+		$('.control1').css('display', 'block')
+		$('.control2').css('display', 'block')
 
 		// hide the instructions
 		$('.start').css('display', 'none')
@@ -263,20 +267,26 @@ const game = {
 	},
 	keyPressed(key) {
 		if(key.toLowerCase() === 'w' && this.powerWasCalled === false &&
-			this.basketballClass.start === true) {
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 1) {
 			this.basketballClass.runPowerSelector()
 			this.powerWasCalled = true
 		} else if(key.toLowerCase() === 'w' && this.powerWasCalled &&
-			this.basketballClass.start === true) {
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 1) {
 			this.basketballClass.stopPowerSelector()
 		} else if(key.toLowerCase() === 'r' && this.dirWasCalled === false &&
-			this.basketballClass.start === true) {
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 1) {
 			this.basketballClass.runDirSelector()
 			this.dirWasCalled = true
 		} else if(key.toLowerCase() === 'r' && this.dirWasCalled &&
-			this.basketballClass.start === true) {
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 1) {
 			this.basketballClass.stopDirSelector()
-		} else if(key.toLowerCase() === 'f' && this.basketballClass.start === true) {
+		} else if(key.toLowerCase() === 'f' && 
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 1) {
 			this.shootingDir()
 		}
 	},
@@ -328,23 +338,69 @@ const game = {
 
 	// status
 	getStatus() { 
-
+		this.winScenario()
 		// check the attemps
 		if(this.remainingAttemp === 0) {
-			// switch player
-			this.basketballClass.switchPlayer()
-			this.remainingAttemp = 3
-			$('.attemp-num').text(this.remainingAttemp)
 
+			// transfer score to player
+			if(this.basketballClass.player===1) {
+				this.playerOnePoint = this.score
+			} else if(this.basketballClass.player===2) {
+				this.playerTwoPoint = this.score
+			}
+
+			// switch player
+			this.remainingAttemp = 3
+				this.winScenario()
+			this.basketballClass.switchPlayer()
+			this.score = 0
+			$('.attemp-num').text(this.remainingAttemp)
+			$('.score-num').text(this.score)
+			$('.player-num').text(this.basketballClass.player)
+			$('.player').text(this.basketballClass.player)
 
 			console.log('hi');
 		}
-		if(this.basketballClass.player === "Player 1") {
-			$('.player-num').text(1)
-		} else if(this.basketballClass.player === "Player 2") {
-			$('.player-num').text(2)
-		}
 
+	},
+	winScenario() {
+		// check the values
+		if(this.remainingAttemp === 0 && 
+			this.basketballClass.player===2) {
+
+			if(this.playerOnePoint > this.playerTwoPoint) {
+				console.log('Player 1 won the round');
+			} else if(this.playerOnePoint < this.playerTwoPoint) {
+				console.log('player 2 won');
+			} else if(this.playerOnePoint === this.playerTwoPoint) {
+				console.log('This round is a tie');
+			}
+		}
+	},
+	keyPressed2(key) {
+		if(key.toLowerCase() === 'u' && this.powerWasCalled === false &&
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 2) {
+			this.basketballClass.runPowerSelector()
+			this.powerWasCalled = true
+		} else if(key.toLowerCase() === 'u' && this.powerWasCalled &&
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 2) {
+			this.basketballClass.stopPowerSelector()
+		} else if(key.toLowerCase() === 'i' && this.dirWasCalled === false &&
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 2) {
+			this.basketballClass.runDirSelector()
+			this.dirWasCalled = true
+		} else if(key.toLowerCase() === 'i' && this.dirWasCalled &&
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 2) {
+			this.basketballClass.stopDirSelector()
+		} else if(key.toLowerCase() === 'j' && 
+			this.basketballClass.start === true &&
+			this.basketballClass.player === 2) {
+			this.shootingDir()
+		}	
 	}
 
 }
@@ -353,6 +409,7 @@ const game = {
 
 $(document).on('keypress', (e) => {
 	game.keyPressed(e.key)
+	game.keyPressed2(e.key)
 })
 
 $('.start-button').click((e) => {
@@ -362,6 +419,9 @@ $('.start-button').click((e) => {
 // 1. tuning aim
 // 2. shoting direction
 // 3. Selector
+
+// reset score
+// dificulty
 
 
 // Check collision
