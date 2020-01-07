@@ -6,6 +6,7 @@ class Basketball {
 		this.powerLevel = null
 		this.direction = null
 		this.start = false
+		this.player = 'player 1'
 	}
 	// run power slider
 	runPowerSelector() {
@@ -53,6 +54,15 @@ class Basketball {
 			this.start = false
 		}
 	}
+
+	// switch player
+	switchPlayer() {
+		if(this.player === 'player 1') {
+			this.player = 'player 2'
+		} else if(this.player === 'player 2') {
+			this.player = 'player 1'
+		}
+	}
 }
 
 const game = {
@@ -68,6 +78,8 @@ const game = {
 	powerWasCalled: false,
 	dirWasCalled: false,
 	basketballClass: new Basketball(),
+	playerOnePoint: 0,
+	playerTwoPoints: 0,
 	// start game
 	startGame() {
 		// Show the game
@@ -153,14 +165,14 @@ const game = {
 		if(this.collisionDetected && 
 			$ball.left > 665 && $ball.left < 685) {
 			this.score++
-			this.collisionDetected = false
+			// this.collisionDetected = false
 			this.highEnough = false
 			clearInterval(this.myIntervalId);
 			console.log(3);
 		} else if(this.collisionDetected && $ball.left < 635) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
-			this.collisionDetected = false
+			// this.collisionDetected = false
 			this.highEnough = false
 			// bounce to left
 			$('#ball').animate({ 
@@ -180,7 +192,7 @@ const game = {
 			$ball.left < 665) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
-			this.collisionDetected = false
+			// this.collisionDetected = false
 			this.highEnough = false
 			// bounce to right
 			$('#ball').animate({ 
@@ -199,7 +211,7 @@ const game = {
 			$ball.left > 685 && $ball.left < 708) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId)
-			this.collisionDetected = false
+			// this.collisionDetected = false
 			this.highEnough = false
 			//bounce left
 			$('#ball').animate({ 
@@ -219,7 +231,7 @@ const game = {
 			$ball.left > 708) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId)
-			this.collisionDetected = false
+			// this.collisionDetected = false
 			this.highEnough = false
 
 			// bounce to right
@@ -294,6 +306,7 @@ const game = {
 				$('#dotD').css({
 					'animation-name': 'range'
 				})
+
 				this.dirWasCalled = false
 				this.basketballClass.powerLevel = 0
 				this.basketballClass.direction = 0

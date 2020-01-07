@@ -230,7 +230,7 @@ body .player-info, #select-panel, .main-container {
 .w, .r, .f {
 	font-size: 20px;
 }
-
+ 
 @keyframes slide {
 	0% { top: 20px; }
 	50% { top: 408px; }
