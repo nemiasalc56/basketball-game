@@ -90,7 +90,7 @@ class Basketball {
 const game = {
 	remainingAttemp: 3,
 	score: 0,
-	round: 0,
+	round: 1,
 	power: 1,
 	collisionDetected: false,
 	myIntervalId: 0,
@@ -121,6 +121,7 @@ const game = {
 		this.basketballClass.startSwitch()
 		$('.score-num').text(this.score)
 		$('.attemp-num').text(this.remainingAttemp)
+		$('.round-num').text(this.round)
 	},
 	// throw the ball
 	throwBall(power, num) {
@@ -280,6 +281,7 @@ const game = {
 		
 		$('.score-num').text(this.score)
 		$('.attemp-num').text(this.remainingAttemp)
+		$('.round-num').text(this.round)
 	},
 	time() {
 		this.myIntervalId = setInterval(() => {
@@ -379,6 +381,7 @@ const game = {
 			this.score = 0
 			$('.attemp-num').text(this.remainingAttemp)
 			$('.score-num').text(this.score)
+			$('.round-num').text(this.round)
 			$('.player-num').text(this.basketballClass.player)
 			$('.player').text(this.basketballClass.player)
 
@@ -436,9 +439,12 @@ const game = {
 	winSceneario() {
 		if(this.round >= 2) {
 			if(this.playerOneRound > this.playerTwoRound) {
-				$('.board1').remove('.rounds')
+				$('.rounds').remove()
+				$('<p id="winner">Player 1 is the winner!!</p>').appendTo('.winner-container')
 				console.log('Player 1 is the winner');
 			} else if(this.playerOneRound < this.playerTwoRound) {
+				$('.rounds').remove()
+				$('<p id="winner">Player 2 is the winner!!</p>').appendTo('.winner-container')
 				console.log('Player 2 is the winner');
 			}
 

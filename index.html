@@ -3,6 +3,7 @@
 <head>
 	<title>basketball game</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -20,9 +21,10 @@
 	</div>
 	
 	<nav class="player-info">
-		<p id="score">Score: <span class="score-num">0</span></p>
-		<p id="player">Player: <span class="player-num">1</span></p>
-		<p id="attemp">Attemps: <span class="attemp-num">0</span></p>
+		<p id="score" class="player-info2">Score: <span class="score-num">0</span></p>
+		<p id="player" class="player-info2">Player: <span class="player-num">1</span></p>
+		<p id="attemp" class="player-info2">Attemps: <span class="attemp-num">0</span></p>
+		<p id="round" class="player-info2">Round: <span class="round-num">1</span></p>
 	</nav>
 
 	<div class="select-panel" id="select-panel">
@@ -88,6 +90,9 @@
 	</div>
 
 	<div class="board2">
+	</div>
+
+	<div class="winner-container">
 	</div>
 
 	<script type="text/javascript" src="js/app.js"></script>

@@ -165,7 +165,7 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	background: white;
 }
 
-#player, .player-num, #score, .score-num, #attemp, .attemp-num {
+.player-info2, .player-num, .score-num, .attemp-num, .round-num {
 	position: absolute;
 	display: inline-block;
 }
@@ -184,7 +184,7 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 }
 
 #player {
-	left: 600px;
+	left: 500px;
 }
 
 #score {
@@ -192,9 +192,16 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 }
 
 #attemp {
-	left: 1000px;
+	left: 800px;
 }
 
+#round {
+	left: 1100px;
+}
+
+.round-num {
+	left: 100px;
+}
 
 #dotD, #dotD2 {
 	position: absolute;
@@ -223,6 +230,8 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	left: 420px;
 	font-size: 20px;
 	display: block;
+	font-family: 'Anton', sans-serif;
+
 }
 
 .instructions {
@@ -284,7 +293,18 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	background-color: #4dff4d;
 }
 
-
+.winner-container {
+	position: absolute;
+	text-align: center;
+	margin-top: 200px;
+	margin-left: 412px;
+	width: 605px;
+	display: inline-block;
+	border-radius: 10px;
+	background-color: rgba(0, 255, 127);
+	font-size: 60px;
+	font-family: 'Anton', sans-serif;
+}
  
 @keyframes slide {
 	0% { top: 20px; }
