@@ -1,5 +1,3 @@
-console.log('basketball game');
-
 class Basketball {
 	constructor() {
 		this.powerLevel = null
@@ -86,6 +84,13 @@ class Basketball {
 			$('.player-info').css('color', 'black')
 		}
 	}
+
+	restartGame() {
+		this.powerLevel = null
+		this.direction = null
+		this.start = false
+		this.player = 1
+	}
 }
 
 const game = {
@@ -130,7 +135,6 @@ const game = {
 		$('#ball').css('animation-play-state', 'running')
 		// ball goes up
 		$('.ball2').animate(power, 900);
-		// the ball goes down
 		$('.ball2').animate({
 			top: '+=2000px',
 			width: '-=60px',
@@ -143,7 +147,6 @@ const game = {
 		}, 10)
 
 	},
-	// shooting direction
 	shootingDir(input1, input2) {
 		const num = {
 			top: `-=${this.basketballClass.powerLevel}px`,
@@ -180,31 +183,23 @@ const game = {
 	
 				this.collisionDetected = true
 				this.checkHitTarget()
-				console.log('collision!');
-				console.log(dx);
 
 			} else {
 				this.collisionDetected = false
 			}	
 		}
-		console.log($ball);
 	},
 	checkHitTarget() {
 		const $ball = $('#ball')[0].getBoundingClientRect()
-		console.log($ball);
 		if(this.collisionDetected && 
 			$ball.left > 664 && $ball.left < 687) {
 			this.score++
-			// this.collisionDetected = false
 			this.highEnough = false
 			clearInterval(this.myIntervalId);
-			console.log(3);
 		} else if(this.collisionDetected && $ball.left < 635) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
-			// this.collisionDetected = false
 			this.highEnough = false
-			// bounce to left
 			$('#ball').animate({ 
 				top:'-=180px',
 				left: '-=90px'
@@ -214,7 +209,6 @@ const game = {
 				left: '-=90px'
 			}, 1800)
 
-			// substrac attemps
 			this.remainingAttemp--
 			console.log($ball);
 			console.log(1);
@@ -222,9 +216,7 @@ const game = {
 			$ball.left < 665) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId);
-			// this.collisionDetected = false
 			this.highEnough = false
-			// bounce to right
 			$('#ball').animate({ 
 				top:'-=180px',
 				left: '+=100px'
@@ -234,16 +226,13 @@ const game = {
 				left: '+=90px',
 			}, 1800)
 
-			// Substrac attemps
 			this.remainingAttemp--
 			console.log(2);
 		} else if(this.collisionDetected &&
 			$ball.left > 684 && $ball.left < 708) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId)
-			// this.collisionDetected = false
 			this.highEnough = false
-			//bounce left
 			$('#ball').animate({ 
 				top:'-=180px',
 				left: '-=90px'
@@ -253,7 +242,6 @@ const game = {
 				left: '-=90px'
 			}, 1800)
 
-			// substrac attemps
 			this.remainingAttemp--
 			console.log('right 1');
 			console.log($ball);
@@ -261,10 +249,8 @@ const game = {
 			$ball.left > 708) {
 			$('#ball').stop()
 			clearInterval(this.myIntervalId)
-			// this.collisionDetected = false
 			this.highEnough = false
 
-			// bounce to right
 			$('#ball').animate({ 
 				top:'-=180px',
 				left: '+=100px'
@@ -274,13 +260,11 @@ const game = {
 				left: '+=90px',
 			}, 1800)
 
-			// substrac attemps
 			this.remainingAttemp--
 
 			console.log('right 2');
 			console.log($ball);
 		} 
-		
 		$('.score-num').text(this.score)
 		$('.attemp-num').text(this.remainingAttemp)
 		$('.round-num').text(this.round2)
@@ -289,7 +273,6 @@ const game = {
 		this.myIntervalId = setInterval(() => {
 			this.checkCollision()
 		}, 1)
-	// Stop timer
 	},
 	keyPressed(key) {
 		if(key.toLowerCase() === 'w' && this.powerWasCalled === false &&
@@ -317,7 +300,6 @@ const game = {
 		}
 	},
 	resetBallPosition() {
-	// reset the position
 		if($('#ball')[0].getBoundingClientRect().top > 700) {
 			$('#ball').stop()
 			$('#ball').css({
@@ -366,7 +348,6 @@ const game = {
 				if(this.collisionDetected === false) {
 					this.remainingAttemp--
 				}
-
 				$('#ball').appendTo($('.main-container'))
 				clearInterval(this.myIntervalId2)
 				clearInterval(this.myIntervalId)
@@ -375,15 +356,39 @@ const game = {
 			this.highEnough = false
 			$('.attemp-num').text(this.remainingAttemp)
 		}
-		// console.log($('#ball')[0].getBoundingClientRect().top);
 	},
+	restartGame2() {
+		this.resetBallPosition()
+		this.remainingAttemp = 3
+		this.score = 0
+		this.round = 0
+		this.round2 = 1
+		this.power = 1
+		this.collisionDetected = false
+		this.myIntervalId = 0
+		this.myIntervalId2 = 0
+		this.highEnough = false
+		this.hitTarget = false
+		this.powerWasCalled = false
+		this.dirWasCalled = false
+		this.playerOnePoint = 0
+		this.playerTwoPoint = 0
+		this.playerOneRound = 0
+		this.playerTwoRound = 0
+		this.basketballClass.restartGame()
 
-	// status
+		$('.start').css('display', 'block')
+		$('.player-info').css('display', 'none')
+		$('#select-panel').css('display', 'none')
+		$('#select-panel2').css('display', 'none')
+		$('.main-container').css('display', 'none')
+		$('.control1').css('display', 'none')
+		$('.control2').css('display', 'none')
+		$('.winner-container').css('display', 'none')
+		console.log('restarting...');
+	},
 	getStatus() { 
-		// check the attemps
 		if(this.remainingAttemp === 0) {
-
-			// transfer score to player
 			if(this.basketballClass.player===1) {
 				this.playerOnePoint = this.score
 			} else if(this.basketballClass.player===2) {
@@ -393,8 +398,6 @@ const game = {
 				this.round2++
 				this.winSceneario()
 			}
-
-			// switch player
 			this.remainingAttemp = 3
 			this.basketballClass.switchPlayer()
 			this.score = 0
@@ -403,13 +406,9 @@ const game = {
 			$('.round-num').text(this.round2)
 			$('.player-num').text(this.basketballClass.player)
 			$('.player').text(this.basketballClass.player)
-
-			console.log('hi');
 		}
-
 	},
 	winRound() {
-		// check the values
 		if(this.remainingAttemp === 0 && 
 			this.basketballClass.player===2) {
 
@@ -423,8 +422,6 @@ const game = {
 				console.log('Player 2 won the round');
 			} else if(this.playerOnePoint === this.playerTwoPoint) {
 				console.log('This round is a tie');
-				this.winCircle()
-				this.winCircle2()
 			}
 		}
 	},
@@ -456,25 +453,28 @@ const game = {
 			this.shootingDir()
 		}	
 	},
-	// check win scenario
 	winSceneario() {
-		if(this.round >= 3) {
+		if(this.round >= 4) {
 			if(this.playerOneRound > this.playerTwoRound) {
 				$('.rounds').remove()
 				this.hideBackground()
+				clearInterval(this.myIntervalId);
+				clearInterval(this.myIntervalId2);
+				$('.winner-container').css('display', 'block')
 				$('<p id="winner">Player 1 is the winner!!</p>').appendTo('.winner-container')
+				$('<button class="restart">Restart Game</button>').appendTo('.winner-container')
 				console.log('Player 1 is the winner');
 			} else if(this.playerOneRound < this.playerTwoRound) {
 				$('.rounds').remove()
 				this.hideBackground()
+				clearInterval(this.myIntervalId2);
+				$('.winner-container').css('display', 'block')
 				$('<p id="winner">Player 2 is the winner!!</p>').appendTo('.winner-container')
+				$('<button class="restart">Restart Game</button>').appendTo('.winner-container')
 				console.log('Player 2 is the winner');
 			}
-
 		}
-
 	},
-	//create win circles
 	winCircle() {
 		$('<div class="rounds"></div>').appendTo($('.board1'))
 	},
@@ -510,10 +510,7 @@ const game = {
 		$('#dotD').css('animation-duration', '2s')
 		$('#dotD2').css('animation-duration', '2s')
 	}
-
 }
-
-
 
 $(document).on('keypress', (e) => {
 	game.keyPressed(e.key)
@@ -534,8 +531,8 @@ $('.hard-button').click((e) => {
 	game.startGame()
 	game.hardOption()
 })
-// 1. tuning aim
-// 2. shoting direction
-// 3. Selector
 
-// dificulty
+$('.restart').click((e) => {
+	game.restartGame2()
+	console.log('buttonnnn');
+})

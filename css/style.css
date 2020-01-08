@@ -254,7 +254,7 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	left: 60px;
 	font-size: 40px;
 	border-radius: 10px;
-	background-color: #e59a9a;
+	background-color: #da7171;
 }
 
 .normal-button {
@@ -270,7 +270,15 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	position: relative;
 	font-size: 40px;
 	border-radius: 10px;
-	background-color: #a52a2a;
+	background-color: #dc143c;
+}
+
+.restart {
+	position: relative;
+	left: 15px;
+	font-size: 40px;
+	border-radius: 10px;
+	background-color: #B22222;
 }
 
 .control1 {
