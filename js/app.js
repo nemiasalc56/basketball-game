@@ -83,6 +83,7 @@ class Basketball {
 			$('.player-info').css('color', 'white')
 		} else if(this.player === 2) {
 			this.player = 1
+			$('.player-info').css('color', 'black')
 		}
 	}
 }
@@ -90,7 +91,8 @@ class Basketball {
 const game = {
 	remainingAttemp: 3,
 	score: 0,
-	round: 1,
+	round: 0,
+	round2: 1,
 	power: 1,
 	collisionDetected: false,
 	myIntervalId: 0,
@@ -121,7 +123,7 @@ const game = {
 		this.basketballClass.startSwitch()
 		$('.score-num').text(this.score)
 		$('.attemp-num').text(this.remainingAttemp)
-		$('.round-num').text(this.round)
+		$('.round-num').text(this.round2)
 	},
 	// throw the ball
 	throwBall(power, num) {
@@ -281,7 +283,7 @@ const game = {
 		
 		$('.score-num').text(this.score)
 		$('.attemp-num').text(this.remainingAttemp)
-		$('.round-num').text(this.round)
+		$('.round-num').text(this.round2)
 	},
 	time() {
 		this.myIntervalId = setInterval(() => {
@@ -333,12 +335,28 @@ const game = {
 				top: '20px'
 			})
 
+			$('#dotP2').css({
+				'animation-name': 'more',
+				top: '20px'
+			})
+			$('#dotD2').css({
+				'animation-name': 'more',
+				top: '20px'
+			})
+
 			if($('#dotP').css('animation-name') == 'more') {
 				$('#dotP').css({
 					'animation-name': 'slide'
 				})
 				this.powerWasCalled = false
 				$('#dotD').css({
+					'animation-name': 'range'
+				})
+				$('#dotP2').css({
+					'animation-name': 'slide'
+				})
+				this.powerWasCalled = false
+				$('#dotD2').css({
 					'animation-name': 'range'
 				})
 
@@ -372,6 +390,7 @@ const game = {
 				this.playerTwoPoint = this.score
 				this.winRound()
 				this.round++
+				this.round2++
 				this.winSceneario()
 			}
 
@@ -381,7 +400,7 @@ const game = {
 			this.score = 0
 			$('.attemp-num').text(this.remainingAttemp)
 			$('.score-num').text(this.score)
-			$('.round-num').text(this.round)
+			$('.round-num').text(this.round2)
 			$('.player-num').text(this.basketballClass.player)
 			$('.player').text(this.basketballClass.player)
 
@@ -404,6 +423,8 @@ const game = {
 				console.log('Player 2 won the round');
 			} else if(this.playerOnePoint === this.playerTwoPoint) {
 				console.log('This round is a tie');
+				this.winCircle()
+				this.winCircle2()
 			}
 		}
 	},
@@ -437,13 +458,15 @@ const game = {
 	},
 	// check win scenario
 	winSceneario() {
-		if(this.round >= 2) {
+		if(this.round >= 3) {
 			if(this.playerOneRound > this.playerTwoRound) {
 				$('.rounds').remove()
+				this.hideBackground()
 				$('<p id="winner">Player 1 is the winner!!</p>').appendTo('.winner-container')
 				console.log('Player 1 is the winner');
 			} else if(this.playerOneRound < this.playerTwoRound) {
 				$('.rounds').remove()
+				this.hideBackground()
 				$('<p id="winner">Player 2 is the winner!!</p>').appendTo('.winner-container')
 				console.log('Player 2 is the winner');
 			}
@@ -457,6 +480,14 @@ const game = {
 	},
 	winCircle2() {
 		$('<div class="rounds"></div>').appendTo($('.board2'))
+	},
+	hideBackground() {
+		$('.player-info').css('display', 'none')
+		$('#select-panel').css('display', 'none')
+		$('#select-panel2').css('display', 'none')
+		$('.main-container').css('display', 'none')
+		$('.control1').css('display', 'none')
+		$('.control2').css('display', 'none')
 	}
 
 }

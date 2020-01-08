@@ -343,7 +343,7 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 
 #dotD, #dotD2 {
 	animation-name: range;
-	animation-duration: 15s;
+	animation-duration: 10s;
 	animation-iteration-count: 500;
 	animation-delay: 0s;
 	animation-play-state: paused;
