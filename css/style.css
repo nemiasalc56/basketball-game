@@ -273,14 +273,6 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	background-color: #dc143c;
 }
 
-.restart {
-	position: relative;
-	left: 15px;
-	font-size: 40px;
-	border-radius: 10px;
-	background-color: #B22222;
-}
-
 .control1 {
 	background-color: rgba(200, 200, 200, 0.5);
 	position: absolute;

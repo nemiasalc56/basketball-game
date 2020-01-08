@@ -5,7 +5,7 @@ class Basketball {
 		this.start = false
 		this.player = 1
 	}
-	// run power slider
+
 	runPowerSelector() {
 		const $dot = $('#dotP').css('animation-play-state', 'running')
 	}
@@ -14,7 +14,6 @@ class Basketball {
 		const $dot = $('#dotP2').css('animation-play-state', 'running')
 	}
 
-	// stop selector
 	stopPowerSelector() {
 		const $dot2 = $('#dotP').css('animation-play-state', 'paused')
 		const $dot = $('#dotP').position().top
@@ -35,21 +34,16 @@ class Basketball {
 		const $dot = $('#dotD2').css('animation-play-state', 'running')
 	}
 
-	// stop selector
 	stopDirSelector() {
 		const $dot2 = $('#dotD').css('animation-play-state', 'paused')
 		const $dot = $('#dotD').position().top
 		this.getBallDirection($dot)
-		console.log($dot);
-		console.log($dot2);
 	}
 
 	stopDirSelector2() {
 		const $dot2 = $('#dotD2').css('animation-play-state', 'paused')
 		const $dot = $('#dotD2').position().top
 		this.getBallDirection($dot)
-		console.log($dot);
-		console.log($dot2);
 	}
 
 	getPowerLevel(power) {
@@ -59,13 +53,11 @@ class Basketball {
 
 	getBallDirection(dir) {
 		const ballDirection = Math.floor((dir*100) / 100)
-		console.log(ballDirection);
 
 		this.direction = ballDirection
 
 	}
 
-	// switch game on/off
 	startSwitch() {
 		if(this.start=== false) {
 			this.start = true
@@ -74,7 +66,6 @@ class Basketball {
 		}
 	}
 
-	// switch player
 	switchPlayer() {
 		if(this.player === 1) {
 			this.player = 2
@@ -85,12 +76,6 @@ class Basketball {
 		}
 	}
 
-	restartGame() {
-		this.powerLevel = null
-		this.direction = null
-		this.start = false
-		this.player = 1
-	}
 }
 
 const game = {
@@ -111,29 +96,22 @@ const game = {
 	playerTwoPoint: 0,
 	playerOneRound: 0,
 	playerTwoRound: 0,
-	// start game
 	startGame() {
-		// Show the game
 		$('.player-info').css('display', 'block')
 		$('#select-panel').css('display', 'block')
 		$('#select-panel2').css('display', 'block')
 		$('.main-container').css('display', 'block')
 		$('.control1').css('display', 'block')
 		$('.control2').css('display', 'block')
-
-		// hide the instructions
 		$('.start').css('display', 'none')
 
-		// switch the game start
 		this.basketballClass.startSwitch()
 		$('.score-num').text(this.score)
 		$('.attemp-num').text(this.remainingAttemp)
 		$('.round-num').text(this.round2)
 	},
-	// throw the ball
 	throwBall(power, num) {
 		$('#ball').css('animation-play-state', 'running')
-		// ball goes up
 		$('.ball2').animate(power, 900);
 		$('.ball2').animate({
 			top: '+=2000px',
@@ -158,18 +136,10 @@ const game = {
 		this.time()
 	},
 
-	// check collision
 	checkCollision() {
 		const $ring = $('#rim')[0].getBoundingClientRect()
 		const $ball = $('#ball')[0].getBoundingClientRect()
-		// console.log(body);
 
-		const dx = $ball.x + $ring.x
-		const dy = $ball.y - $ring.y
-		const ballRadius = $ball.height / 2
-		const ringRadius = $ring.height / 2
-		const distance = Math.sqrt(dx*dx + dy*dy)
-		// check the position
 		if($ball.top < 100) {
 			this.highEnough = true
 			$('#rim').appendTo($('.main-container'))
@@ -210,8 +180,7 @@ const game = {
 			}, 1800)
 
 			this.remainingAttemp--
-			console.log($ball);
-			console.log(1);
+
 		} else if(this.collisionDetected && $ball.left > 635 &&
 			$ball.left < 665) {
 			$('#ball').stop()
@@ -227,7 +196,7 @@ const game = {
 			}, 1800)
 
 			this.remainingAttemp--
-			console.log(2);
+
 		} else if(this.collisionDetected &&
 			$ball.left > 684 && $ball.left < 708) {
 			$('#ball').stop()
@@ -243,8 +212,7 @@ const game = {
 			}, 1800)
 
 			this.remainingAttemp--
-			console.log('right 1');
-			console.log($ball);
+			
 		} else if(this.collisionDetected &&
 			$ball.left > 708) {
 			$('#ball').stop()
@@ -262,8 +230,6 @@ const game = {
 
 			this.remainingAttemp--
 
-			console.log('right 2');
-			console.log($ball);
 		} 
 		$('.score-num').text(this.score)
 		$('.attemp-num').text(this.remainingAttemp)
@@ -357,36 +323,7 @@ const game = {
 			$('.attemp-num').text(this.remainingAttemp)
 		}
 	},
-	restartGame2() {
-		this.resetBallPosition()
-		this.remainingAttemp = 3
-		this.score = 0
-		this.round = 0
-		this.round2 = 1
-		this.power = 1
-		this.collisionDetected = false
-		this.myIntervalId = 0
-		this.myIntervalId2 = 0
-		this.highEnough = false
-		this.hitTarget = false
-		this.powerWasCalled = false
-		this.dirWasCalled = false
-		this.playerOnePoint = 0
-		this.playerTwoPoint = 0
-		this.playerOneRound = 0
-		this.playerTwoRound = 0
-		this.basketballClass.restartGame()
-
-		$('.start').css('display', 'block')
-		$('.player-info').css('display', 'none')
-		$('#select-panel').css('display', 'none')
-		$('#select-panel2').css('display', 'none')
-		$('.main-container').css('display', 'none')
-		$('.control1').css('display', 'none')
-		$('.control2').css('display', 'none')
-		$('.winner-container').css('display', 'none')
-		console.log('restarting...');
-	},
+	
 	getStatus() { 
 		if(this.remainingAttemp === 0) {
 			if(this.basketballClass.player===1) {
@@ -415,13 +352,9 @@ const game = {
 			if(this.playerOnePoint > this.playerTwoPoint) {
 				this.playerOneRound++
 				this.winCircle()
-				console.log('Player 1 won the round');
 			} else if(this.playerOnePoint < this.playerTwoPoint) {
 				this.playerTwoRound++
 				this.winCircle2()
-				console.log('Player 2 won the round');
-			} else if(this.playerOnePoint === this.playerTwoPoint) {
-				console.log('This round is a tie');
 			}
 		}
 	},
@@ -462,16 +395,13 @@ const game = {
 				clearInterval(this.myIntervalId2);
 				$('.winner-container').css('display', 'block')
 				$('<p id="winner">Player 1 is the winner!!</p>').appendTo('.winner-container')
-				$('<button class="restart">Restart Game</button>').appendTo('.winner-container')
-				console.log('Player 1 is the winner');
+
 			} else if(this.playerOneRound < this.playerTwoRound) {
 				$('.rounds').remove()
 				this.hideBackground()
 				clearInterval(this.myIntervalId2);
 				$('.winner-container').css('display', 'block')
 				$('<p id="winner">Player 2 is the winner!!</p>').appendTo('.winner-container')
-				$('<button class="restart">Restart Game</button>').appendTo('.winner-container')
-				console.log('Player 2 is the winner');
 			}
 		}
 	},
@@ -497,11 +427,11 @@ const game = {
 		$('#dotD2').css('animation-duration', '11s')
 	},
 	normalOption() {
-		$('#dotP').css('animation-duration', '5s')
-		$('#dotP2').css('animation-duration', '5s')
+		$('#dotP').css('animation-duration', '7s')
+		$('#dotP2').css('animation-duration', '7s')
 
-		$('#dotD').css('animation-duration', '5s')
-		$('#dotD2').css('animation-duration', '5s')
+		$('#dotD').css('animation-duration', '7s')
+		$('#dotD2').css('animation-duration', '7s')
 	},
 	hardOption() {
 		$('#dotP').css('animation-duration', '2s')
@@ -530,9 +460,4 @@ $('.normal-button').click((e) => {
 $('.hard-button').click((e) => {
 	game.startGame()
 	game.hardOption()
-})
-
-$('.restart').click((e) => {
-	game.restartGame2()
-	console.log('buttonnnn');
 })
