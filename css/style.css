@@ -225,10 +225,10 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	border-radius: 10px;
 	width: 600px;
 	height: 400px;
-	background-color: aqua;
+	background-color: rgba(50, 205, 50, 0.9);
 	top: 100px;
 	left: 420px;
-	font-size: 20px;
+	font-size: 22px;
 	display: block;
 	font-family: 'Anton', sans-serif;
 
@@ -238,12 +238,39 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	text-align: center;
 }
 
-.start-button {
+.info, .difficulty {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.difficulty {
+	margin-top: 10px;
+	text-align: center;
+}
+
+
+.easy-button {
 	position: relative;
-	left: 190px;
+	left: 60px;
 	font-size: 40px;
 	border-radius: 10px;
-	background-color: chartreuse;
+	background-color: #e59a9a;
+}
+
+.normal-button {
+	position: relative;
+	left: 128px;
+	font-size: 40px;
+	border-radius: 10px;
+	background-color: #da7171;
+}
+
+.hard-button {
+	left: 180px;
+	position: relative;
+	font-size: 40px;
+	border-radius: 10px;
+	background-color: #a52a2a;
 }
 
 .control1 {

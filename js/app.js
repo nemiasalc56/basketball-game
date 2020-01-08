@@ -488,6 +488,27 @@ const game = {
 		$('.main-container').css('display', 'none')
 		$('.control1').css('display', 'none')
 		$('.control2').css('display', 'none')
+	},
+	easyOption() {
+		$('#dotP').css('animation-duration', '11s')
+		$('#dotP2').css('animation-duration', '11s')
+
+		$('#dotD').css('animation-duration', '11s')
+		$('#dotD2').css('animation-duration', '11s')
+	},
+	normalOption() {
+		$('#dotP').css('animation-duration', '5s')
+		$('#dotP2').css('animation-duration', '5s')
+
+		$('#dotD').css('animation-duration', '5s')
+		$('#dotD2').css('animation-duration', '5s')
+	},
+	hardOption() {
+		$('#dotP').css('animation-duration', '2s')
+		$('#dotP2').css('animation-duration', '2s')
+
+		$('#dotD').css('animation-duration', '2s')
+		$('#dotD2').css('animation-duration', '2s')
 	}
 
 }
@@ -499,10 +520,20 @@ $(document).on('keypress', (e) => {
 	game.keyPressed2(e.key)
 })
 
-$('.start-button').click((e) => {
+$('.easy-button').click((e) => {
 	game.startGame()
+	game.easyOption()
 })
 
+$('.normal-button').click((e) => {
+	game.startGame()
+	game.normalOption()
+})
+
+$('.hard-button').click((e) => {
+	game.startGame()
+	game.hardOption()
+})
 // 1. tuning aim
 // 2. shoting direction
 // 3. Selector
