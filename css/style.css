@@ -10,7 +10,7 @@ html body {
 	left: 500px;
 }
 
-body .player-info, #select-panel, .main-container {
+body .player-info, #select-panel, .main-container, #select-panel2 {
 	display: none;
 }
 

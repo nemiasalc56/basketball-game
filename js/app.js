@@ -109,6 +109,7 @@ const game = {
 		// Show the game
 		$('.player-info').css('display', 'block')
 		$('#select-panel').css('display', 'block')
+		$('#select-panel2').css('display', 'block')
 		$('.main-container').css('display', 'block')
 		$('.control1').css('display', 'block')
 		$('.control2').css('display', 'block')
@@ -135,7 +136,7 @@ const game = {
 
 		this.myIntervalId2 = setInterval(() => {
 			this.resetBallPosition()
-			this.getStatus()	
+			this.getStatus()
 		}, 10)
 
 	},
@@ -392,9 +393,11 @@ const game = {
 
 			if(this.playerOnePoint > this.playerTwoPoint) {
 				this.playerOneRound++
+				this.winCircle()
 				console.log('Player 1 won the round');
 			} else if(this.playerOnePoint < this.playerTwoPoint) {
 				this.playerTwoRound++
+				this.winCircle2()
 				console.log('Player 2 won the round');
 			} else if(this.playerOnePoint === this.playerTwoPoint) {
 				console.log('This round is a tie');
@@ -433,6 +436,7 @@ const game = {
 	winSceneario() {
 		if(this.round >= 2) {
 			if(this.playerOneRound > this.playerTwoRound) {
+				$('.board1').remove('.rounds')
 				console.log('Player 1 is the winner');
 			} else if(this.playerOneRound < this.playerTwoRound) {
 				console.log('Player 2 is the winner');
@@ -440,6 +444,13 @@ const game = {
 
 		}
 
+	},
+	//create win circles
+	winCircle() {
+		$('<div class="rounds"></div>').appendTo($('.board1'))
+	},
+	winCircle2() {
+		$('<div class="rounds"></div>').appendTo($('.board2'))
 	}
 
 }
