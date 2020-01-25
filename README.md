@@ -1,4 +1,4 @@
-# basketball-game
+# Shooting Hoops Game
 
 - Two player game.
 
