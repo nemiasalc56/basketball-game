@@ -96,6 +96,10 @@ const game = {
     playerTwoPoint: 0,
     playerOneRound: 0,
     playerTwoRound: 0,
+    sliderA: false,
+    sliderB: false,
+    slidersSelected: false,
+    ballWasThrown: false,
     startGame() {
         $('.player-info').css('display', 'block')
         $('#select-panel').css('display', 'block')
@@ -243,26 +247,44 @@ const game = {
     keyPressed(key) {
         if (key.toLowerCase() === 'w' && this.powerWasCalled === false &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 1) {
+            this.basketballClass.player === 1 &&
+            this.sliderA === false) {
             this.basketballClass.runPowerSelector()
+            // turn off the other letters until the player stops the slider
+
             this.powerWasCalled = true
         } else if (key.toLowerCase() === 'w' && this.powerWasCalled &&
             this.basketballClass.start === true &&
             this.basketballClass.player === 1) {
             this.basketballClass.stopPowerSelector()
+            this.sliderA = true
+            
         } else if (key.toLowerCase() === 'r' && this.dirWasCalled === false &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 1) {
+            this.basketballClass.player === 1 &&
+            this.sliderA) {
             this.basketballClass.runDirSelector()
             this.dirWasCalled = true
+            
         } else if (key.toLowerCase() === 'r' && this.dirWasCalled &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 1) {
+            this.basketballClass.player === 1 &&
+            this.sliderA) {
             this.basketballClass.stopDirSelector()
+            this.sliderB = true
+            if(this.sliderA) {
+                this.slidersSelected = true
+                this.ballWasThrown = false
+            }
         } else if (key.toLowerCase() === 'f' &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 1) {
+            this.basketballClass.player === 1 && this.slidersSelected &&
+            this.ballWasThrown === false) {
             this.shootingDir()
+            this.ballWasThrown = true
+            this.sliderA = false
+            this.sliderB = false
+            this.slidersSelected = false
         }
     },
     resetBallPosition() {
@@ -362,28 +384,46 @@ const game = {
         if (key.toLowerCase() === 'u' &&
             this.powerWasCalled === false &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 2) {
+            this.basketballClass.player === 2 &&
+            this.sliderA === false) {
             this.basketballClass.runPowerSelector2()
             this.powerWasCalled = true
+
         } else if (key.toLowerCase() === 'u' &&
             this.powerWasCalled &&
             this.basketballClass.start === true &&
             this.basketballClass.player === 2) {
             this.basketballClass.stopPowerSelector2()
+            this.sliderA = true
+
         } else if (key.toLowerCase() === 'i' &&
             this.dirWasCalled === false &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 2) {
+            this.basketballClass.player === 2 && 
+            this.sliderA) {
             this.basketballClass.runDirSelector2()
             this.dirWasCalled = true
+
         } else if (key.toLowerCase() === 'i' && this.dirWasCalled &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 2) {
+            this.basketballClass.player === 2 ) {
             this.basketballClass.stopDirSelector2()
+            this.sliderB = true
+            if(this.sliderA) {
+                this.slidersSelected = true
+                this.ballWasThrown = false
+            }
+
         } else if (key.toLowerCase() === 'j' &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 2) {
+            this.basketballClass.player === 2 &&
+            this.slidersSelected && this.ballWasThrown === false) {
             this.shootingDir()
+            this.ballWasThrown = true
+
+            this.slidersSelected = false
+            this.sliderA = false
+            this.sliderB = false
         }
     },
     winSceneario() {
