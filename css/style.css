@@ -23,7 +23,7 @@ body .player-info, #select-panel, .main-container, #select-panel2 {
 	background-color: white;
 	text-align: center;
 	border: 9px solid black;
-	box-shadow: 12px 12px 5px rgba(0, 0, 0, .5);
+	box-shadow: 30px 20px 30px rgba(0, 0, 0);
 }
 
 .ball-indicator {

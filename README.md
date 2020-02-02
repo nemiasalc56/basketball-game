@@ -1,5 +1,12 @@
 # Shooting Hoops Game
 
+This is a two players game, when you first open the game, you will see a square with the instructions on how to play the game. This is a 4 rounds game or more. The player that scores more points in each round will win that round. The player that wins the most rounds wins the game.
+
+--
+
+You will also see three buttons, "Easy", "Normal" and "Hard". If you choose easy the slider selectors will move slower, for normal a bit faster and for hard it will move really fast.
+
+
 - Two player game.
 
 - The user is able to select easy, normal and hard.
