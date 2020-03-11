@@ -18,6 +18,6 @@ You will also see three buttons, "Easy", "Normal" and "Hard". If you choose easy
 
 - In each round the player that score the most wins the round.
 
-- The game will have 4 or more.
+- The game will have 4 or more rounds.
 
 - The user will be able to see the score and the rounds on the screen.
