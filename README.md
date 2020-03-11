@@ -12,7 +12,7 @@ You will also see three buttons, "Easy", "Normal" and "Hard". If you choose easy
 - The user is able to select easy, normal and hard.
 
 - The user use a slider selector for the direction and another one for power using the letters W, R and F 
- for  player 1. For player 2 U,I and J.
+ for  player 1. For player 2 U, I and J.
 
 - Each player will have three attemps per round and score as much as they can without failing more than three attemps.
 
