@@ -164,6 +164,7 @@ const game = {
         }
     },
     checkHitTarget() {
+        // get the position of the ball after is trown
         const $ball = $('#ball')[0].getBoundingClientRect()
         if (this.collisionDetected &&
             $ball.left > 664 && $ball.left < 687) {
@@ -245,7 +246,8 @@ const game = {
         }, 1)
     },
     keyPressed(key) {
-        if (key.toLowerCase() === 'w' && this.powerWasCalled === false &&
+        if (key.toLowerCase() === 'w' && 
+            this.powerWasCalled === false &&
             this.basketballClass.start === true &&
             this.basketballClass.player === 1 &&
             this.sliderA === false) {
@@ -278,13 +280,57 @@ const game = {
             }
         } else if (key.toLowerCase() === 'f' &&
             this.basketballClass.start === true &&
-            this.basketballClass.player === 1 && this.slidersSelected &&
+            this.basketballClass.player === 1 && 
+            this.slidersSelected &&
             this.ballWasThrown === false) {
             this.shootingDir()
             this.ballWasThrown = true
             this.sliderA = false
             this.sliderB = false
             this.slidersSelected = false
+        }else if (key.toLowerCase() === 'u' &&
+            this.powerWasCalled === false &&
+            this.basketballClass.start === true &&
+            this.basketballClass.player === 2 &&
+            this.sliderA === false) {
+            this.basketballClass.runPowerSelector2()
+            this.powerWasCalled = true
+
+        } else if (key.toLowerCase() === 'u' &&
+            this.powerWasCalled &&
+            this.basketballClass.start === true &&
+            this.basketballClass.player === 2) {
+            this.basketballClass.stopPowerSelector2()
+            this.sliderA = true
+
+        } else if (key.toLowerCase() === 'i' &&
+            this.dirWasCalled === false &&
+            this.basketballClass.start === true &&
+            this.basketballClass.player === 2 && 
+            this.sliderA) {
+            this.basketballClass.runDirSelector2()
+            this.dirWasCalled = true
+
+        } else if (key.toLowerCase() === 'i' && this.dirWasCalled &&
+            this.basketballClass.start === true &&
+            this.basketballClass.player === 2 ) {
+            this.basketballClass.stopDirSelector2()
+            this.sliderB = true
+            if(this.sliderA) {
+                this.slidersSelected = true
+                this.ballWasThrown = false
+            }
+
+        } else if (key.toLowerCase() === 'j' &&
+            this.basketballClass.start === true &&
+            this.basketballClass.player === 2 &&
+            this.slidersSelected && this.ballWasThrown === false) {
+            this.shootingDir()
+            this.ballWasThrown = true
+
+            this.slidersSelected = false
+            this.sliderA = false
+            this.sliderB = false
         }
     },
     resetBallPosition() {
@@ -380,52 +426,6 @@ const game = {
             }
         }
     },
-    keyPressed2(key) {
-        if (key.toLowerCase() === 'u' &&
-            this.powerWasCalled === false &&
-            this.basketballClass.start === true &&
-            this.basketballClass.player === 2 &&
-            this.sliderA === false) {
-            this.basketballClass.runPowerSelector2()
-            this.powerWasCalled = true
-
-        } else if (key.toLowerCase() === 'u' &&
-            this.powerWasCalled &&
-            this.basketballClass.start === true &&
-            this.basketballClass.player === 2) {
-            this.basketballClass.stopPowerSelector2()
-            this.sliderA = true
-
-        } else if (key.toLowerCase() === 'i' &&
-            this.dirWasCalled === false &&
-            this.basketballClass.start === true &&
-            this.basketballClass.player === 2 && 
-            this.sliderA) {
-            this.basketballClass.runDirSelector2()
-            this.dirWasCalled = true
-
-        } else if (key.toLowerCase() === 'i' && this.dirWasCalled &&
-            this.basketballClass.start === true &&
-            this.basketballClass.player === 2 ) {
-            this.basketballClass.stopDirSelector2()
-            this.sliderB = true
-            if(this.sliderA) {
-                this.slidersSelected = true
-                this.ballWasThrown = false
-            }
-
-        } else if (key.toLowerCase() === 'j' &&
-            this.basketballClass.start === true &&
-            this.basketballClass.player === 2 &&
-            this.slidersSelected && this.ballWasThrown === false) {
-            this.shootingDir()
-            this.ballWasThrown = true
-
-            this.slidersSelected = false
-            this.sliderA = false
-            this.sliderB = false
-        }
-    },
     winSceneario() {
         if (this.round >= 4) {
             if (this.playerOneRound > this.playerTwoRound) {
@@ -460,18 +460,18 @@ const game = {
         $('.control2').css('display', 'none')
     },
     easyOption() {
-        $('#dotP').css('animation-duration', '11s')
-        $('#dotP2').css('animation-duration', '11s')
+        $('#dotP').css('animation-duration', '9s')
+        $('#dotP2').css('animation-duration', '9s')
 
-        $('#dotD').css('animation-duration', '11s')
-        $('#dotD2').css('animation-duration', '11s')
+        $('#dotD').css('animation-duration', '9s')
+        $('#dotD2').css('animation-duration', '9s')
     },
     normalOption() {
-        $('#dotP').css('animation-duration', '7s')
-        $('#dotP2').css('animation-duration', '7s')
+        $('#dotP').css('animation-duration', '5s')
+        $('#dotP2').css('animation-duration', '5s')
 
-        $('#dotD').css('animation-duration', '7s')
-        $('#dotD2').css('animation-duration', '7s')
+        $('#dotD').css('animation-duration', '5s')
+        $('#dotD2').css('animation-duration', '5s')
     },
     hardOption() {
         $('#dotP').css('animation-duration', '2s')
@@ -484,7 +484,6 @@ const game = {
 
 $(document).on('keypress', (e) => {
     game.keyPressed(e.key)
-    game.keyPressed2(e.key)
 })
 
 $('.easy-button').click((e) => {
