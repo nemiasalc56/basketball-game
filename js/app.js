@@ -172,9 +172,11 @@ const game = {
             this.highEnough = false
             clearInterval(this.myIntervalId);
         } else if (this.collisionDetected && $ball.left < 635) {
+            // bounce to the left when you hit the left border of the rim
             $('#ball').stop()
             clearInterval(this.myIntervalId);
             this.highEnough = false
+            $('#ball').css('animation-play-state', 'running')
             $('#ball').animate({
                 top: '-=180px',
                 left: '-=90px'
@@ -188,6 +190,7 @@ const game = {
 
         } else if (this.collisionDetected && $ball.left > 635 &&
             $ball.left < 665) {
+            // bounce to the right when you hit the left border of the rim
             $('#ball').stop()
             clearInterval(this.myIntervalId);
             this.highEnough = false
@@ -207,6 +210,8 @@ const game = {
             $('#ball').stop()
             clearInterval(this.myIntervalId)
             this.highEnough = false
+            // bounce to the left when you hit the right border of the rim
+            console.log("third");
             $('#ball').animate({
                 top: '-=180px',
                 left: '-=90px'
@@ -223,7 +228,8 @@ const game = {
             $('#ball').stop()
             clearInterval(this.myIntervalId)
             this.highEnough = false
-
+            // bounce to the right when you hit the right border of the rim
+            
             $('#ball').animate({
                 top: '-=180px',
                 left: '+=100px'
@@ -335,6 +341,7 @@ const game = {
     },
     resetBallPosition() {
         if ($('#ball')[0].getBoundingClientRect().top > 700) {
+            $('#ball').css('animation-play-state', 'paused')
             $('#ball').stop()
             $('#ball').css({
                 left: '170px',
